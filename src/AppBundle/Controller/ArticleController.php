@@ -16,7 +16,7 @@ class ArticleController extends Controller
     public function listArticleAction(Request $request)
     {
         return $this->render('article/list.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'articles' => $this->getAllArticles(),
         ]);
     }
 
@@ -28,5 +28,14 @@ class ArticleController extends Controller
         return $this->render('article/show.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
+    }
+
+    private function getAllArticles(){
+        $pdo = new \PDO('mysql:host=localhost;dbname=symfony;charset=utf8', 'root', '');
+        $query = 'SELECT * FROM articles';
+        $articles = $pdo->prepare($query);
+        $articles->execute();
+
+        return $articles->fetchAll();
     }
 }
