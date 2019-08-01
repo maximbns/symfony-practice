@@ -3,10 +3,14 @@
 {% block body %}
     <div class="container">
         <h1>Liste des articles</h1>
+        {% if articles %}
         <div class="list-group">
-            <a href="{{ path('article_show') }}" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            <a href="{{ path('article_show') }}" class="list-group-item list-group-item-action">Morbi leo risus</a>
-            <a href="{{ path('article_show') }}" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+            {% for article in articles %}
+            <a href="{{ path('article_show', {'id': article.id}) }}" class="list-group-item list-group-item-action">{{ article.title }}</a>
+            {% endfor %}
         </div>
+        {% else %}
+        <p>Aucun article à afficher</p>
+        {% endif %}
     </div>
 {% endblock %}

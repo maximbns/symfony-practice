@@ -3,8 +3,8 @@
 {% block body %}
     <div class="container">
         <a href="{{ path('article_list') }}">&#8592; Retour à la liste des articles</a>
-        <h1>Mon article</h1>
-        <p class="card">Aliquam molestie ligula eu sapien vestibulum consequat. Donec eget lectus porttitor, auctor quam a, mollis mi. Sed iaculis luctus velit quis imperdiet. Pellentesque facilisis, eros pretium mattis auctor, nisi mauris vehicula justo, quis sollicitudin tellus mauris at arcu. Etiam risus mi, sagittis id eleifend eu, consequat sed lectus. Integer volutpat erat nec vestibulum rutrum. Sed quis sollicitudin magna. Curabitur eu volutpat nisi, non sodales neque. Nunc tincidunt eleifend dolor sit amet placerat. Phasellus id ex porttitor nibh semper feugiat. Phasellus non tortor accumsan, dictum elit nec, pellentesque nulla. Ut neque lacus, mattis a enim nec, lobortis vulputate orci. Integer sed ante condimentum, commodo leo et, venenatis sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eleifend tristique dolor. Integer sed iaculis erat, et mattis leo. </p>
+        <h1>{{ article.title }}</h1>
+        <p class="card">{{ article.description }}</p>
     </div>
 {% endblock %}
 

@@ -13,7 +13,7 @@ class ArticleController extends Controller
     /**
  * @Route("/blog/articles", name="article_list")
  */
-    public function listArticleAction(Request $request)
+    public function listArticleAction()
     {
         return $this->render('article/list.html.twig', [
             'articles' => $this->getAllArticles(),
@@ -23,10 +23,10 @@ class ArticleController extends Controller
     /**
      * @Route("/blog/article/{id}", name="article_show", requirements={"id"="\d+"})
      */
-    public function showArticleAction(Request $request, $id = 1)
+    public function showArticleAction($id)
     {
         return $this->render('article/show.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'article' => $this->getOneArticle($id)
         ]);
     }
 
@@ -37,5 +37,14 @@ class ArticleController extends Controller
         $articles->execute();
 
         return $articles->fetchAll();
+    }
+
+    private function getOneArticle($id){
+        $pdo = new \PDO('mysql:host=localhost;dbname=symfony;charset=utf8', 'root', '');
+        $query = 'SELECT * FROM articles WHERE id = '.$id;
+        $articles = $pdo->prepare($query);
+        $articles->execute();
+        $result = $articles->fetchAll();
+        return $result ? $result[0] : null;
     }
 }
