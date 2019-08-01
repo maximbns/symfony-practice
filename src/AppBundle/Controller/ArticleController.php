@@ -58,7 +58,7 @@ class ArticleController extends Controller
         $query = 'SELECT * FROM articles WHERE id = '.$id;
         $articles = $pdo->prepare($query);
         $articles->execute();
-        $result = $articles->fetchAll();
-        return $result ? $result[0] : null;
+
+        return $articles->fetch();
     }
 }
